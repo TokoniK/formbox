@@ -1,0 +1,11 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+.bg-0A108F {
+  /* --tw-bg-opacity: 1; */
+  background-color: purple !important;
+}
