@@ -390,7 +390,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
         form={formRef}
         ref={ref}
         onFinish={onSubmit}
-        className={"py-4 overflow-auto" + className}
+        className={`py-4 overflow-auto ${className}`}
         style={style}
       >
         <div
