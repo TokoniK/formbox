@@ -7,8 +7,9 @@ type FieldTypeSelect = "Select";
 type FieldTypeCurrency = "Currency";
 type FieldTypeEmail = "Email";
 type FieldTypePassword = "Password";
-type FieldTypeOther = "Checkbox" | "DatePicker";
-type FieldType = FieldTypeText & FieldTypeRadio & FieldTypeCurrency & FieldTypeSelect & FieldTypeEmail & FieldTypePassword & FieldTypeOther;
+type FieldTypeCheckbox = "Checkbox";
+type FieldTypeDatePicker = "DatePicker";
+type FieldType = FieldTypeText & FieldTypeRadio & FieldTypeCurrency & FieldTypeSelect & FieldTypeEmail & FieldTypePassword & FieldTypeCheckbox & FieldTypeDatePicker;
 type Options = {
     value: any;
     label: string;
@@ -42,11 +43,14 @@ type FormField = ({
     fieldType: FieldTypeCurrency;
     currencySymbol?: string;
 } & CommonFields) | ({
-    fieldType: FieldTypeOther;
+    fieldType: FieldTypeDatePicker;
 } & CommonFields) | ({
     fieldType: FieldTypeEmail;
 } & CommonFields) | ({
     fieldType: FieldTypePassword;
+} & CommonFields) | ({
+    fieldType: FieldTypeCheckbox;
+    checked?: boolean;
 } & CommonFields);
 type FormFieldSelect = {
     fieldType: FieldTypeSelect;
@@ -68,4 +72,4 @@ interface FormBoxProps {
 
 declare const FormBox: React$1.ForwardRefExoticComponent<FormBoxProps & React$1.RefAttributes<FormInstance<any>>>;
 
-export { type FieldType, type FieldTypeCurrency, type FieldTypeEmail, type FieldTypeOther, type FieldTypePassword, type FieldTypeRadio, type FieldTypeSelect, type FieldTypeText, type FormBoxProps, type FormField, type FormFieldSelect, type Options, FormBox as default };
+export { type FieldType, type FieldTypeCheckbox, type FieldTypeCurrency, type FieldTypeDatePicker, type FieldTypeEmail, type FieldTypePassword, type FieldTypeRadio, type FieldTypeSelect, type FieldTypeText, type FormBoxProps, type FormField, type FormFieldSelect, type Options, FormBox as default };

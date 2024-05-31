@@ -4,14 +4,17 @@ export type FieldTypeSelect = "Select";
 export type FieldTypeCurrency = "Currency";
 export type FieldTypeEmail = "Email";
 export type FieldTypePassword = "Password";
-export type FieldTypeOther = "Checkbox" | "DatePicker";
+export type FieldTypeCheckbox = "Checkbox";
+export type FieldTypeDatePicker = "DatePicker";
+
 export type FieldType = FieldTypeText &
   FieldTypeRadio &
   FieldTypeCurrency &
   FieldTypeSelect &
   FieldTypeEmail &
   FieldTypePassword &
-  FieldTypeOther;
+  FieldTypeCheckbox &
+  FieldTypeDatePicker;
 // | "InputText"
 // | "TextArea"
 // | "InputNumber"
@@ -77,13 +80,17 @@ export type FormField =
       currencySymbol?: string;
     } & CommonFields)
   | ({
-      fieldType: FieldTypeOther; // = "DatePicker"|"Checkbox"|"Radio";
+      fieldType: FieldTypeDatePicker; // = "DatePicker";
     } & CommonFields)
   | ({
       fieldType: FieldTypeEmail;
     } & CommonFields)
   | ({
       fieldType: FieldTypePassword;
+    } & CommonFields)
+  | ({
+      fieldType: FieldTypeCheckbox;
+      checked?: boolean;
     } & CommonFields);
 
 export type FormFieldSelect = {

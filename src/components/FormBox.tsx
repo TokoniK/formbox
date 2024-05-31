@@ -148,7 +148,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       // var val: object = { id: checked }
       // val[id.toString()] = checked;
       // setCheckBoxValues((prev) => ({ ...prev, ...val }))
-      // console.log(e);
+      console.log(e.target.checked);
     };
 
     // const radioGroupAction = (e: RadioChangeEvent) => {
@@ -204,10 +204,19 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       var form = (
         <div className="justify-center mx-4 pt-4 items-center content-center ">
           {/* <Space size={"small"}> */}
-          {formStruct.map((i) => {
+          {formStruct.map((i, index) => {
             i.disabled = i.disabled ? i.disabled : false;
             i.hideLabel = i.hideLabel ? i.hideLabel : hideLabels;
-            // console.log(hideSubmitButton);
+
+            let optAttr: object = new Object();
+
+            if (i.fieldType == "Checkbox") {
+              optAttr = {
+                ...optAttr,
+                valuePropName: "checked",
+                initialValue: i.checked,
+              };
+            }
 
             let rules: Rule[] = [];
             i.fieldType == "Email"
@@ -220,16 +229,13 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
             const onChange = (e: any) => {
               if (i.onChange) {
                 i.onChange(e);
-                console.log("fired");
-
-                return;
               }
-              console.log("not implemented");
             };
             // rules = [...rules,{type: "email"}]
             // i.fieldType == "Email" && rules = [rules]rules.push({type: "email"});
             return (
               <Form.Item
+                key={index}
                 className=""
                 // label={i.fieldName}
                 {...(i.hideLabel ? {} : { label: i.fieldName })}
@@ -243,6 +249,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 rules={rules}
                 // {...register(i.id)}
                 name={i.id}
+                {...optAttr}
               >
                 {i.fieldType == "InputText" && (
                   <Input
@@ -305,8 +312,11 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 {i.fieldType == "Checkbox" && (
                   <Checkbox
                     disabled={i.disabled}
-                    onChange={checkBoxAction}
+                    // onChange={checkBoxAction}
                     style={{ ...i.controlStyle }}
+                    // checked={i.checked}
+                    // defaultChecked={i.checked}
+                    // value={i.checked}
                   />
                 )}
 
@@ -411,6 +421,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
     const onSubmit = async (data: any) => {
       // console.log({ ...register("id") });
       // console.log({ ...data, ...checkBoxValues /*...radioGroupValues*/ });
+      console.log(data);
       submitAction(data);
     };
 
