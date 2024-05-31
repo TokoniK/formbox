@@ -5,9 +5,9 @@ import dts from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
-import autoprefixer from "autoprefixer";
+// import autoprefixer from "autoprefixer";
 // import path from 'path'
-import tailwindcss from 'tailwindcss';
+// import tailwindcss from 'tailwindcss';
 const tailwindConfig = require('./tailwind.config.js');
 
 
