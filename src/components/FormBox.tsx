@@ -45,6 +45,9 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       submitButtonTitle = "Submit",
       submitButtonStyle,
       hideSubmitButton,
+      resetButtonTitle = "Clear",
+      resetButtonStyle,
+      hideResetButton,
       title = "",
       style,
       className,
@@ -392,12 +395,12 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
               style={{
                 height: "40px",
                 verticalAlign: "top",
-                ...submitButtonStyle,
-                ...(hideSubmitButton ? { display: "none" } : {}),
+                ...resetButtonStyle,
+                ...(hideResetButton ? { display: "none" } : {}),
               }}
               onClick={resetForm}
             >
-              Clear
+              {resetButtonTitle}
             </Button>
           </div>
           {/* </Space> */}

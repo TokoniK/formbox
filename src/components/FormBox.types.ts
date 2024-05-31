@@ -107,8 +107,12 @@ export interface FormBoxProps {
   submitButtonTitle?: string;
   submitButtonStyle?: React.CSSProperties;
   hideSubmitButton?: boolean;
+
+  resetButtonTitle?: string;
+  resetButtonStyle?: React.CSSProperties;
+  hideResetButton?: boolean;
+
   title?: string;
   titleStyle?: React.CSSProperties;
   hideLabels?: boolean;
-  // ref: ForwardedRef<typeof DForm>;
 }
