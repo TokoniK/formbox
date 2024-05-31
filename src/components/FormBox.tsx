@@ -146,11 +146,9 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       // var id: string = e.target.id || ''
       // var checked = e.target.checked ? e.target.checked : false
       // var val: object = { id: checked }
-
       // val[id.toString()] = checked;
-
       // setCheckBoxValues((prev) => ({ ...prev, ...val }))
-      console.log(e);
+      // console.log(e);
     };
 
     // const radioGroupAction = (e: RadioChangeEvent) => {
@@ -361,7 +359,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 height: "40px",
                 verticalAlign: "top",
                 ...submitButtonStyle,
-                ...(hideSubmitButton ? { visibility: "hidden" } : {}),
+                ...(hideSubmitButton ? { display: "none" } : {}),
               }}
               htmlType="submit"
             >
@@ -377,7 +375,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 height: "40px",
                 verticalAlign: "top",
                 ...submitButtonStyle,
-                ...(hideSubmitButton ? { visibility: "hidden" } : {}),
+                ...(hideSubmitButton ? { display: "none" } : {}),
               }}
               onClick={resetForm}
             >
@@ -411,7 +409,6 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
     // }
 
     const onSubmit = async (data: any) => {
-      console.log(formRef.getFieldValue("f1"));
       // console.log({ ...register("id") });
       // console.log({ ...data, ...checkBoxValues /*...radioGroupValues*/ });
       submitAction(data);
@@ -423,12 +420,12 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
         form={formRef}
         ref={ref}
         onFinish={onSubmit}
-        className={"py-4 " + className}
+        className={"py-4 overflow-auto" + className}
         style={style}
       >
-        <span className="px-4 text-2xl " style={titleStyle}>
+        <div className="px-4 text-2xl w-full " style={titleStyle}>
           {title}
-        </span>
+        </div>
 
         {buildForm(form ? form : testForm)}
       </Form>
