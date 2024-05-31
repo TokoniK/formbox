@@ -15,15 +15,7 @@ export type FieldType = FieldTypeText &
   FieldTypePassword &
   FieldTypeCheckbox &
   FieldTypeDatePicker;
-// | "InputText"
-// | "TextArea"
-// | "InputNumber"
-// | "Select"
-// | "Radio"
-// | "RadioGroup"
-// | "Checkbox"
-// | "DatePicker"
-// | "Currency";
+
 export type Options = {
   value: boolean | string | number;
   label: string;
@@ -39,49 +31,35 @@ type CommonFields = {
   initialValue?: any;
   value?: any;
   block?: boolean;
-  fieldStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
   controlStyle?: React.CSSProperties;
+  className?: string;
+  controlClassName?: string;
   required?: boolean;
   hideLabel?: boolean;
   onChange?: Function;
 };
 
 export type FormField =
-  // {
-  //   id: any;
-  //   fieldName: string;
-  //   fieldType: FieldType;
-  //   fieldLength: string;
-  //   disabled?: boolean;
-  //   options?: Options[];
-  //   rows?: number;
-  //   initialValue?: any;
-  //   value?: any;
-  //   block?: boolean;
-  //   fieldStyle?: React.CSSProperties;
-  //   controlStyle?: React.CSSProperties;
-  //   required?: boolean;
-  //   currencySymbol?: string;
-  // }|
   | ({
       fieldType: FieldTypeText; //= "InputText"|"TextArea"|"InputNumber";
     } & CommonFields)
   | ({
-      fieldType: FieldTypeSelect; // = "Select"|"RadioGroup";
+      fieldType: FieldTypeSelect;
       options?: Options[];
       // depends?: string;
     } & CommonFields)
   | ({
-      fieldType: FieldTypeRadioGroup; // = "Select"|"RadioGroup";
+      fieldType: FieldTypeRadioGroup;
       options?: Options[];
       defaultValue?: boolean | string | number;
     } & CommonFields)
   | ({
-      fieldType: FieldTypeCurrency; // = "Currency";
+      fieldType: FieldTypeCurrency;
       currencySymbol?: string;
     } & CommonFields)
   | ({
-      fieldType: FieldTypeDatePicker; // = "DatePicker";
+      fieldType: FieldTypeDatePicker;
     } & CommonFields)
   | ({
       fieldType: FieldTypeEmail;
@@ -108,12 +86,16 @@ export interface FormBoxProps {
   submitButtonTitle?: string;
   submitButtonStyle?: React.CSSProperties;
   hideSubmitButton?: boolean;
+  submitButtonClassName?: string;
 
   resetButtonTitle?: string;
   resetButtonStyle?: React.CSSProperties;
   hideResetButton?: boolean;
+  resetButtonClassName?: string;
 
   title?: string;
   titleStyle?: React.CSSProperties;
+  titleClassName?: string;
+
   hideLabels?: boolean;
 }

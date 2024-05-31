@@ -24,8 +24,10 @@ type CommonFields = {
     initialValue?: any;
     value?: any;
     block?: boolean;
-    fieldStyle?: React.CSSProperties;
+    style?: React.CSSProperties;
     controlStyle?: React.CSSProperties;
+    className?: string;
+    controlClassName?: string;
     required?: boolean;
     hideLabel?: boolean;
     onChange?: Function;
@@ -65,11 +67,14 @@ interface FormBoxProps {
     submitButtonTitle?: string;
     submitButtonStyle?: React.CSSProperties;
     hideSubmitButton?: boolean;
+    submitButtonClassName?: string;
     resetButtonTitle?: string;
     resetButtonStyle?: React.CSSProperties;
     hideResetButton?: boolean;
+    resetButtonClassName?: string;
     title?: string;
     titleStyle?: React.CSSProperties;
+    titleClassName?: string;
     hideLabels?: boolean;
 }
 

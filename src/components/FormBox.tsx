@@ -12,18 +12,10 @@ import {
   // Space,
   Radio,
 } from "antd";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 import { formatCurrency, parseCurrency } from "./Common";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { RadioChangeEvent } from "antd";
 import { FormInstance } from "antd";
-import {
-  FieldType,
-  FormBoxProps,
-  FormField,
-  FormFieldSelect,
-  Options,
-} from "./FormBox.types";
+import { FormBoxProps, FormField, FormFieldSelect } from "./FormBox.types";
 import { Rule } from "antd/es/form";
 
 const { TextArea } = Input;
@@ -36,114 +28,120 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       submitButtonTitle = "Submit",
       submitButtonStyle,
       hideSubmitButton,
+      submitButtonClassName,
+
       resetButtonTitle = "Clear",
       resetButtonStyle,
       hideResetButton,
+      resetButtonClassName,
+
       title = "",
       style,
       className,
       hideLabels = false,
       titleStyle,
+      titleClassName,
     },
     ref
   ) => {
+    const options = [
+      { value: "1", label: "True", category: "1" },
+      { value: "0", label: "False", category: "0" },
+    ];
+    // const [opts, setOpts] = useState(options);
+
     var testForm: FormField[] = [
       {
-        id: "f1",
+        id: "f10",
         fieldName: "field1",
         fieldType: "InputText",
-        fieldLength: "50%",
+        fieldLength: "100%",
+        // onChange: (e: any) => {
+        //   if (!e.target.value) {
+        //     setOpts(options);
+        //     return;
+        //   }
+        //   const o = options.filter((i) => i.category == e.target.value);
+        //   setOpts(o);
+        // },
+      },
+      {
+        id: "f1",
+        fieldName: "field123",
+        fieldType: "Password",
+        fieldLength: "100%",
       },
       {
         id: "f2",
-        fieldName: "field2",
-        fieldType: "InputText",
-        fieldLength: "50%",
-        disabled: true,
+        fieldName: "field123",
+        fieldType: "Password",
+        fieldLength: "100%",
       },
       {
         id: "f3",
+        fieldName: "field12",
+        fieldType: "Email",
+        fieldLength: "100%",
+        disabled: true,
+      },
+      {
+        id: "f4",
+        fieldName: "field1",
+        fieldType: "TextArea",
+        fieldLength: "100%",
+      },
+      {
+        id: "f5",
         fieldName: "field3",
         fieldType: "InputNumber",
         fieldLength: "50%",
         disabled: false,
       },
       {
-        id: "f4",
+        id: "f6",
         fieldName: "field4",
         fieldType: "Currency",
         fieldLength: "100%",
-        disabled: false,
+        disabled: true,
         // currencySymbol: '$'
       },
 
       {
-        id: "f5",
+        id: "f7",
         fieldName: "field5",
         fieldType: "DatePicker",
         fieldLength: "50%",
-        disabled: false,
         block: true,
+        hideLabel: false,
       },
-      {
-        id: "f6",
-        fieldName: "field6",
-        fieldType: "Checkbox",
-        fieldLength: "50%",
-        disabled: false,
-      },
-      {
-        id: "f7",
-        fieldName: "field7",
-        fieldType: "RadioGroup",
-        fieldLength: "50%",
-        disabled: false,
-        value: 2,
-      },
+
       {
         id: "f8",
-        fieldName: "field8",
-        fieldType: "Select",
-        fieldLength: "33%",
-        disabled: false,
+        fieldName: "field5",
+        fieldType: "Checkbox",
+        fieldLength: "50%",
+        block: true,
+        hideLabel: false,
+        // checked: false,
       },
       {
         id: "f9",
-        fieldName: "field9",
+
+        fieldName: "field8",
         fieldType: "Select",
         fieldLength: "33%",
-        disabled: false,
-        options: [
-          { value: "1", label: "xxx" },
-          { value: "2", label: "xxx2" },
-        ],
-        fieldStyle: { borderWidth: 3 },
-        controlStyle: { borderWidth: 3 },
+        options: options, //opts,
       },
       {
-        id: "f10",
-        fieldName: "field10",
+        id: "f11",
+
+        fieldName: "field11",
         fieldType: "RadioGroup",
-        fieldLength: "33%",
-        disabled: false,
-        options: [
-          { value: "1", label: "xxx" },
-          { value: "2", label: "xxx2" },
-        ],
+        fieldLength: "100%",
+        options: options,
+        // defaultValue: "2",
       },
     ];
-
-    // const [checkBoxValues, setCheckBoxValues] = useState<{}>()
-    // const [radioGroupValues, setRadioGroupValues] = useState<{}>()
-
-    // const checkBoxAction = (e: CheckboxChangeEvent | RadioChangeEvent) => {
-    //   // var id: string = e.target.id || ''
-    //   // var checked = e.target.checked ? e.target.checked : false
-    //   // var val: object = { id: checked }
-    //   // val[id.toString()] = checked;
-    //   // setCheckBoxValues((prev) => ({ ...prev, ...val }))
-    //   console.log(e.target.checked);
-    // };
 
     const [formRef] = Form.useForm();
 
@@ -223,23 +221,19 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 i.onChange(e);
               }
             };
-            // rules = [...rules,{type: "email"}]
-            // i.fieldType == "Email" && rules = [rules]rules.push({type: "email"});
             return (
               <Form.Item
                 key={index}
-                className=""
+                className={` ${i.className}`}
                 // label={i.fieldName}
                 {...(i.hideLabel ? {} : { label: i.fieldName })}
                 style={{
                   display: i.block ? "block" : "inline-block",
                   width: i.fieldLength,
-                  ...i.fieldStyle,
+                  ...i.style,
                 }}
                 initialValue={i.initialValue}
-                // rules={[{ required: i.required},]}
                 rules={rules}
-                // {...register(i.id)}
                 name={i.id}
                 {...optAttr}
               >
@@ -249,6 +243,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "Password" && (
@@ -258,6 +253,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     autoComplete="password"
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "Email" && (
@@ -266,6 +262,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + "email@example.com"}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "InputNumber" && (
@@ -274,6 +271,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "TextArea" && (
@@ -283,6 +281,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "Currency" && (
@@ -294,6 +293,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "Select" && (
@@ -305,17 +305,15 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     // {...(i.depends ? { dependencies: [i.depends] } : {})}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
                 {i.fieldType == "Checkbox" && (
                   <Checkbox
                     disabled={i.disabled}
-                    // onChange={checkBoxAction}
                     style={{ ...i.controlStyle }}
-                    // checked={i.checked}
-                    // defaultChecked={i.checked}
-                    // value={i.checked}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
 
@@ -325,6 +323,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     disabled={i.disabled}
                     style={{ ...i.controlStyle }}
                     onChange={onChange}
+                    className={` ${i.controlClassName}`}
                   />
                 )}
 
@@ -335,6 +334,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     onChange={onChange}
                     style={{ ...i.controlStyle }}
                     value={i.defaultValue}
+                    className={` ${i.controlClassName}`}
                   >
                     {i.options?.map((r) => (
                       <Radio value={r.value} defaultChecked={true}>
@@ -344,21 +344,11 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                   </Radio.Group>
                 )}
               </Form.Item>
-              // </span>
             );
           })}
           <div className={`flex gap-8 w-full px-4`}>
-            {/* <Button
-                htmlType="submit"
-                type="primary"
-                className="border border-blue-500 text-blue-500"
-              >
-                {submitButtonTitle || "Submit"}
-              </Button> */}
             <Button
-              className={
-                "text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] "
-              }
+              className={`text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] ${submitButtonClassName}`}
               style={{
                 height: "40px",
                 verticalAlign: "top",
@@ -371,9 +361,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
             </Button>
 
             <Button
-              className={
-                "text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] "
-              }
+              className={`text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] ${resetButtonClassName}`}
               style={{
                 height: "40px",
                 verticalAlign: "top",
@@ -393,7 +381,6 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
     };
 
     const onSubmit = async (data: any) => {
-      // console.log({ ...data, ...checkBoxValues /*...radioGroupValues*/ });
       submitAction(data);
     };
 
@@ -406,7 +393,10 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
         className={"py-4 overflow-auto" + className}
         style={style}
       >
-        <div className="px-4 text-2xl w-full " style={titleStyle}>
+        <div
+          className={`px-4 text-2xl w-full ${titleClassName}`}
+          style={titleStyle}
+        >
           {title}
         </div>
 
