@@ -265,6 +265,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     autoComplete="password"
+                    onChange={onChange}
                   />
                 )}
                 {i.fieldType == "Email" && (
@@ -272,6 +273,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     disabled={i.disabled}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + "email@example.com"}
+                    onChange={onChange}
                   />
                 )}
                 {i.fieldType == "InputNumber" && (
@@ -279,6 +281,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     disabled={i.disabled}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
+                    onChange={onChange}
                   />
                 )}
                 {i.fieldType == "TextArea" && (
@@ -287,6 +290,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     disabled={i.disabled}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
+                    onChange={onChange}
                   />
                 )}
                 {i.fieldType == "Currency" && (
@@ -297,6 +301,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     parser={parseCurrency}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
+                    onChange={onChange}
                   />
                 )}
                 {i.fieldType == "Select" && (
@@ -307,6 +312,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     options={i.options}
                     style={{ ...i.controlStyle }}
                     // {...(i.depends ? { dependencies: [i.depends] } : {})}
+                    onChange={onChange}
                   />
                 )}
                 {i.fieldType == "Checkbox" && (
@@ -317,6 +323,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     // checked={i.checked}
                     // defaultChecked={i.checked}
                     // value={i.checked}
+                    onChange={onChange}
                   />
                 )}
 
@@ -325,6 +332,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     type="datetime-local"
                     disabled={i.disabled}
                     style={{ ...i.controlStyle }}
+                    onChange={onChange}
                   />
                 )}
 
@@ -338,7 +346,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                   <Radio.Group
                     disabled={i.disabled}
                     name={i.id}
-                    // onChange={radioGroupAction}
+                    onChange={onChange}
                     style={{ ...i.controlStyle }}
                   >
                     {i.options?.map((r) => (
