@@ -1,5 +1,4 @@
 // import "./styles.module.css";
-// import styles from "./styles.module.css";
 import "./index.css";
 
 import {
@@ -13,18 +12,10 @@ import {
   // Space,
   Radio,
 } from "antd";
-import React, {
-  //  ForwardedRef,
-  ReactElement,
-  useState,
-  // useImperativeHandle
-} from "react";
-// import { useState } from 'react'
-// import { useForm } from "react-hook-form";
+import React, { ReactElement, useState } from "react";
 import { formatCurrency, parseCurrency } from "./Common";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { RadioChangeEvent } from "antd";
-// import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import { FormInstance } from "antd";
 import {
   FieldType,
@@ -123,8 +114,8 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
         fieldLength: "33%",
         disabled: false,
         options: [
-          { value: 1, label: "xxx" },
-          { value: 2, label: "xxx2" },
+          { value: "1", label: "xxx" },
+          { value: "2", label: "xxx2" },
         ],
         fieldStyle: { borderWidth: 3 },
         controlStyle: { borderWidth: 3 },
@@ -136,8 +127,8 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
         fieldLength: "33%",
         disabled: false,
         options: [
-          { value: 1, label: "xxx" },
-          { value: 2, label: "xxx2" },
+          { value: "1", label: "xxx" },
+          { value: "2", label: "xxx2" },
         ],
       },
     ];
@@ -145,24 +136,15 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
     // const [checkBoxValues, setCheckBoxValues] = useState<{}>()
     // const [radioGroupValues, setRadioGroupValues] = useState<{}>()
 
-    const checkBoxAction = (e: CheckboxChangeEvent | RadioChangeEvent) => {
-      // var id: string = e.target.id || ''
-      // var checked = e.target.checked ? e.target.checked : false
-      // var val: object = { id: checked }
-      // val[id.toString()] = checked;
-      // setCheckBoxValues((prev) => ({ ...prev, ...val }))
-      console.log(e.target.checked);
-    };
+    // const checkBoxAction = (e: CheckboxChangeEvent | RadioChangeEvent) => {
+    //   // var id: string = e.target.id || ''
+    //   // var checked = e.target.checked ? e.target.checked : false
+    //   // var val: object = { id: checked }
+    //   // val[id.toString()] = checked;
+    //   // setCheckBoxValues((prev) => ({ ...prev, ...val }))
+    //   console.log(e.target.checked);
+    // };
 
-    // const radioGroupAction = (e: RadioChangeEvent) => {
-    //   // var id: string = e.target.id;
-    //   // var value = e.target.value;
-    //   // var val = {};
-    //   // val[id.toString()] = value;
-
-    //   // setCheckBoxValues((prev) => ({ ...prev, ...val }));
-    //   console.log(e)
-    // }
     const [formRef] = Form.useForm();
 
     const resetForm = () => {
@@ -172,7 +154,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
     const filterOption = (
       input: string,
       self: FormFieldSelect,
-      option?: { label: string; value: string }
+      option?: { label: string; value: boolean | string | number }
     ) => {
       var found = true;
       // if (self.depends) {
@@ -192,16 +174,15 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       );
     };
 
-    const filterDependentOption = (
-      options: Options[] = [],
-      dependsOn: string
-    ) => {
-      console.log("hi");
-      const dv = formRef.getFieldValue(dependsOn);
-      return options.filter((o) => {
-        o.category === dv;
-      });
-    };
+    // const filterDependentOption = (
+    //   options: Options[] = [],
+    //   dependsOn: string
+    // ) => {
+    //   const dv = formRef.getFieldValue(dependsOn);
+    //   return options.filter((o) => {
+    //     o.category === dv;
+    //   });
+    // };
 
     const buildForm = (formStruct: FormField[]): ReactElement => {
       var form = (
@@ -218,6 +199,14 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 ...optAttr,
                 valuePropName: "checked",
                 initialValue: i.checked,
+              };
+            }
+
+            if (i.fieldType == "RadioGroup") {
+              optAttr = {
+                ...optAttr,
+                valuePropName: "checked",
+                initialValue: i.defaultValue,
               };
             }
 
@@ -339,21 +328,16 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                   />
                 )}
 
-                {/* {i.fieldType == "Radio" && (
-                  <Radio.Group name={i.id} onChange={radioGroupAction} style={{ ...i.controlStyle }}>
-                    <Radio disabled={i.disabled} value={i.value}  />
-                  </Radio.Group>
-                )} */}
-
                 {i.fieldType == "RadioGroup" && (
                   <Radio.Group
                     disabled={i.disabled}
                     name={i.id}
                     onChange={onChange}
                     style={{ ...i.controlStyle }}
+                    value={i.defaultValue}
                   >
                     {i.options?.map((r) => (
-                      <Radio checked={false} value={r.value}>
+                      <Radio value={r.value} defaultChecked={true}>
                         {r.label}
                       </Radio>
                     ))}
@@ -374,7 +358,6 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
             <Button
               className={
                 "text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] "
-                // + styles["bg-0A108F"]
               }
               style={{
                 height: "40px",
@@ -390,7 +373,6 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
             <Button
               className={
                 "text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] "
-                // + styles["bg-0A108F"]
               }
               style={{
                 height: "40px",
@@ -410,29 +392,8 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       return form;
     };
 
-    // const {
-    //   register,
-    //   handleSubmit,
-    //   watch,
-    //   reset,
-    //   formState: { errors },
-    // } = useForm();
-
-    // useImperativeHandle(ref, () => ({
-    //   // triggerSubmit() {
-    //   //   formRef.submit();
-    //   // }
-
-    // }));
-
-    // const triggerSubmit = () => {
-    //   formRef.submit()
-    // }
-
     const onSubmit = async (data: any) => {
-      // console.log({ ...register("id") });
       // console.log({ ...data, ...checkBoxValues /*...radioGroupValues*/ });
-      console.log(data);
       submitAction(data);
     };
 

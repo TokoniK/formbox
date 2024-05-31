@@ -1,5 +1,5 @@
 export type FieldTypeText = "InputText" | "TextArea" | "InputNumber";
-export type FieldTypeRadio = "RadioGroup";
+export type FieldTypeRadioGroup = "RadioGroup";
 export type FieldTypeSelect = "Select";
 export type FieldTypeCurrency = "Currency";
 export type FieldTypeEmail = "Email";
@@ -8,7 +8,7 @@ export type FieldTypeCheckbox = "Checkbox";
 export type FieldTypeDatePicker = "DatePicker";
 
 export type FieldType = FieldTypeText &
-  FieldTypeRadio &
+  FieldTypeRadioGroup &
   FieldTypeCurrency &
   FieldTypeSelect &
   FieldTypeEmail &
@@ -25,7 +25,7 @@ export type FieldType = FieldTypeText &
 // | "DatePicker"
 // | "Currency";
 export type Options = {
-  value: any;
+  value: boolean | string | number;
   label: string;
   category?: string;
 };
@@ -69,11 +69,12 @@ export type FormField =
   | ({
       fieldType: FieldTypeSelect; // = "Select"|"RadioGroup";
       options?: Options[];
-      depends?: string;
+      // depends?: string;
     } & CommonFields)
   | ({
-      fieldType: FieldTypeRadio; // = "Select"|"RadioGroup";
+      fieldType: FieldTypeRadioGroup; // = "Select"|"RadioGroup";
       options?: Options[];
+      defaultValue?: boolean | string | number;
     } & CommonFields)
   | ({
       fieldType: FieldTypeCurrency; // = "Currency";

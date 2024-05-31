@@ -2,16 +2,16 @@ import React$1 from 'react';
 import { FormInstance } from 'antd';
 
 type FieldTypeText = "InputText" | "TextArea" | "InputNumber";
-type FieldTypeRadio = "RadioGroup";
+type FieldTypeRadioGroup = "RadioGroup";
 type FieldTypeSelect = "Select";
 type FieldTypeCurrency = "Currency";
 type FieldTypeEmail = "Email";
 type FieldTypePassword = "Password";
 type FieldTypeCheckbox = "Checkbox";
 type FieldTypeDatePicker = "DatePicker";
-type FieldType = FieldTypeText & FieldTypeRadio & FieldTypeCurrency & FieldTypeSelect & FieldTypeEmail & FieldTypePassword & FieldTypeCheckbox & FieldTypeDatePicker;
+type FieldType = FieldTypeText & FieldTypeRadioGroup & FieldTypeCurrency & FieldTypeSelect & FieldTypeEmail & FieldTypePassword & FieldTypeCheckbox & FieldTypeDatePicker;
 type Options = {
-    value: any;
+    value: boolean | string | number;
     label: string;
     category?: string;
 };
@@ -35,10 +35,10 @@ type FormField = ({
 } & CommonFields) | ({
     fieldType: FieldTypeSelect;
     options?: Options[];
-    depends?: string;
 } & CommonFields) | ({
-    fieldType: FieldTypeRadio;
+    fieldType: FieldTypeRadioGroup;
     options?: Options[];
+    defaultValue?: boolean | string | number;
 } & CommonFields) | ({
     fieldType: FieldTypeCurrency;
     currencySymbol?: string;
@@ -75,4 +75,4 @@ interface FormBoxProps {
 
 declare const FormBox: React$1.ForwardRefExoticComponent<FormBoxProps & React$1.RefAttributes<FormInstance<any>>>;
 
-export { type FieldType, type FieldTypeCheckbox, type FieldTypeCurrency, type FieldTypeDatePicker, type FieldTypeEmail, type FieldTypePassword, type FieldTypeRadio, type FieldTypeSelect, type FieldTypeText, type FormBoxProps, type FormField, type FormFieldSelect, type Options, FormBox as default };
+export { type FieldType, type FieldTypeCheckbox, type FieldTypeCurrency, type FieldTypeDatePicker, type FieldTypeEmail, type FieldTypePassword, type FieldTypeRadioGroup, type FieldTypeSelect, type FieldTypeText, type FormBoxProps, type FormField, type FormFieldSelect, type Options, FormBox as default };
