@@ -348,7 +348,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
           })}
           <div className={`flex gap-8 w-full px-4`}>
             <Button
-              className={`text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] ${submitButtonClassName}`}
+              className={`text-xl align-middle shadow-[#000000] shadow-md rounded-3xl  border-[#111111] border-2 text-[#111111] ${submitButtonClassName}`}
               style={{
                 height: "40px",
                 verticalAlign: "top",
@@ -361,7 +361,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
             </Button>
 
             <Button
-              className={`text-xl shadow-inner align-middle shadow-[#ffffff] rounded-3xl  border-[#111111] border-2 text-[#111111] ${resetButtonClassName}`}
+              className={`text-xl align-middle shadow-[#000000] shadow-md rounded-3xl  border-[#111111] border-2 text-[#111111] ${resetButtonClassName}`}
               style={{
                 height: "40px",
                 verticalAlign: "top",
