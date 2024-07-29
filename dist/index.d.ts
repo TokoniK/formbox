@@ -9,7 +9,8 @@ type FieldTypeEmail = "Email";
 type FieldTypePassword = "Password";
 type FieldTypeCheckbox = "Checkbox";
 type FieldTypeDatePicker = "DatePicker";
-type FieldType = FieldTypeText & FieldTypeRadioGroup & FieldTypeCurrency & FieldTypeSelect & FieldTypeEmail & FieldTypePassword & FieldTypeCheckbox & FieldTypeDatePicker;
+type FieldTypeCollapse = "Collapse";
+type FieldType = FieldTypeText & FieldTypeRadioGroup & FieldTypeCurrency & FieldTypeSelect & FieldTypeEmail & FieldTypePassword & FieldTypeCheckbox & FieldTypeDatePicker & FieldTypeCollapse;
 type Options = {
     value: boolean | string | number;
     label: string;
@@ -53,7 +54,11 @@ type FormField = ({
 } & CommonFields) | ({
     fieldType: FieldTypeCheckbox;
     checked?: boolean;
-} & CommonFields);
+} & CommonFields) | {
+    fieldType: FieldTypeCollapse;
+    header?: string;
+    id: number | string;
+};
 type FormFieldSelect = {
     fieldType: FieldTypeSelect;
     options?: Options[];
@@ -80,4 +85,4 @@ interface FormBoxProps {
 
 declare const FormBox: React$1.ForwardRefExoticComponent<FormBoxProps & React$1.RefAttributes<FormInstance<any>>>;
 
-export { type FieldType, type FieldTypeCheckbox, type FieldTypeCurrency, type FieldTypeDatePicker, type FieldTypeEmail, type FieldTypePassword, type FieldTypeRadioGroup, type FieldTypeSelect, type FieldTypeText, type FormBoxProps, type FormField, type FormFieldSelect, type Options, FormBox as default };
+export { type FieldType, type FieldTypeCheckbox, type FieldTypeCollapse, type FieldTypeCurrency, type FieldTypeDatePicker, type FieldTypeEmail, type FieldTypePassword, type FieldTypeRadioGroup, type FieldTypeSelect, type FieldTypeText, type FormBoxProps, type FormField, type FormFieldSelect, type Options, FormBox as default };

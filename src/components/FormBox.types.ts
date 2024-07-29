@@ -6,6 +6,7 @@ export type FieldTypeEmail = "Email";
 export type FieldTypePassword = "Password";
 export type FieldTypeCheckbox = "Checkbox";
 export type FieldTypeDatePicker = "DatePicker";
+export type FieldTypeCollapse = "Collapse";
 
 export type FieldType = FieldTypeText &
   FieldTypeRadioGroup &
@@ -14,7 +15,8 @@ export type FieldType = FieldTypeText &
   FieldTypeEmail &
   FieldTypePassword &
   FieldTypeCheckbox &
-  FieldTypeDatePicker;
+  FieldTypeDatePicker &
+  FieldTypeCollapse;
 
 export type Options = {
   value: boolean | string | number;
@@ -70,7 +72,12 @@ export type FormField =
   | ({
       fieldType: FieldTypeCheckbox;
       checked?: boolean;
-    } & CommonFields);
+    } & CommonFields)
+  | {
+      fieldType: FieldTypeCollapse;
+      header?: string;
+      id: number | string;
+    };
 
 export type FormFieldSelect = {
   fieldType: FieldTypeSelect;
