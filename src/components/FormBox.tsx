@@ -261,7 +261,12 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
           <div className="justify-center mx-4 pt-4 items-center content-center ">
             {/* { */}
             {buildFormFields(ungrouped)}
-            <Collapse items={items} defaultActiveKey={[firstId]} />;{/* } */}
+            <Collapse
+              items={items}
+              defaultActiveKey={[firstId]}
+              className="mb-4"
+            />
+            {/* } */}
             {/* {buildFormFields(formStruct)} */}
             {buildButtonBar()}
             {/* </Space> */}
