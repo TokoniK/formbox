@@ -158,7 +158,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
         fieldType: "RadioGroup",
         fieldLength: "100%",
         options: options,
-        // defaultValue: "2",
+        // defaultValue: "0",
       },
     ];
 
@@ -471,13 +471,12 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     name={i.id}
                     onChange={onChange}
                     style={{ ...i.controlStyle }}
-                    value={i.defaultValue}
+                    // value={i.defaultValue}
+                    defaultValue={i.defaultValue}
                     className={` ${i.controlClassName}`}
                   >
                     {i.options?.map((r) => (
-                      <Radio value={r.value} defaultChecked={true}>
-                        {r.label}
-                      </Radio>
+                      <Radio value={r.value}>{r.label}</Radio>
                     ))}
                   </Radio.Group>
                 )}
