@@ -444,6 +444,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                     // {...(i.depends ? { dependencies: [i.depends] } : {})}
                     onChange={onChange}
                     className={` ${i.controlClassName}`}
+                    dropdownStyle={{ zIndex: 2000 }}
                   />
                 )}
                 {i.fieldType == "Checkbox" && (
