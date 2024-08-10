@@ -42,7 +42,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       hideLabels = false,
       titleStyle,
       titleClassName,
-      readonly = false,
+      readonly,
     },
     ref
   ) => {
