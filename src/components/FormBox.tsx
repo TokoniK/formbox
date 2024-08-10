@@ -42,6 +42,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
       hideLabels = false,
       titleStyle,
       titleClassName,
+      readonly = false,
     },
     ref
   ) => {
@@ -377,7 +378,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
               >
                 {i.fieldType == "InputText" && (
                   <Input
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
@@ -386,7 +387,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 )}
                 {i.fieldType == "Password" && (
                   <Input.Password
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     autoComplete="password"
@@ -396,7 +397,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 )}
                 {i.fieldType == "Email" && (
                   <Input
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + "email@example.com"}
                     onChange={onChange}
@@ -405,7 +406,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 )}
                 {i.fieldType == "InputNumber" && (
                   <InputNumber
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
@@ -415,7 +416,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 {i.fieldType == "TextArea" && (
                   <TextArea
                     rows={i.rows || 2}
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     placeholder={(i.required ? "*" : "") + i.fieldName}
                     onChange={onChange}
@@ -425,7 +426,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 {i.fieldType == "Currency" && (
                   <InputNumber
                     addonBefore={i.currencySymbol || "$"}
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     formatter={formatCurrency}
                     parser={parseCurrency}
                     style={{ ...i.controlStyle }}
@@ -438,7 +439,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                   <Select
                     showSearch
                     filterOption={(x, o) => filterOption(x, i, o)}
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     options={i.options}
                     style={{ ...i.controlStyle }}
                     // {...(i.depends ? { dependencies: [i.depends] } : {})}
@@ -449,7 +450,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 )}
                 {i.fieldType == "Checkbox" && (
                   <Checkbox
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     onChange={onChange}
                     className={` ${i.controlClassName}`}
@@ -459,7 +460,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
                 {i.fieldType == "DatePicker" && (
                   <Input
                     type="datetime-local"
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     style={{ ...i.controlStyle }}
                     onChange={onChange}
                     className={` ${i.controlClassName}`}
@@ -468,7 +469,7 @@ const FormBox = React.forwardRef<FormInstance, FormBoxProps>(
 
                 {i.fieldType == "RadioGroup" && (
                   <Radio.Group
-                    disabled={i.disabled}
+                    disabled={i.disabled || readonly}
                     name={i.id}
                     onChange={onChange}
                     style={{ ...i.controlStyle }}

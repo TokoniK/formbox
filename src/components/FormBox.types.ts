@@ -105,4 +105,5 @@ export interface FormBoxProps {
   titleClassName?: string;
 
   hideLabels?: boolean;
+  readonly?: boolean;
 }

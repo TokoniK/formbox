@@ -81,6 +81,7 @@ interface FormBoxProps {
     titleStyle?: React.CSSProperties;
     titleClassName?: string;
     hideLabels?: boolean;
+    readonly?: boolean;
 }
 
 declare const FormBox: React$1.ForwardRefExoticComponent<FormBoxProps & React$1.RefAttributes<FormInstance<any>>>;
